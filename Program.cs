@@ -15,10 +15,12 @@ namespace KillerCard
             
 
             Fonts.ConsoleUtils.MasFontSize();
+            Console.ResetColor();
             
             
 
             Seleccion:
+            Console.Clear();
             Console.Write("    ");
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.White;
@@ -39,41 +41,37 @@ namespace KillerCard
            
             int opcion = 0;
             
-                  opcion = int.Parse(Console.ReadLine());
-            
-            
-            
-           
+            opcion = int.Parse(Console.ReadLine());
 
             switch (opcion)
-                        {
-                            
-                            case 1:
-                                Console.Clear();
-                                Juego.Partidas.IniciarNuevaPartida();
-                                break;
-                            case 2:
-                                Console.Clear();
-                                Datos.Game.CargarPartida();
-                                break;
-                            case 3:
-                                Console.Clear();
-                                Console.WriteLine("Hola");
-                                Console.ReadKey();
-                                break;
-                            case 4:
-                                Console.Clear();
-                                
-                                break;
-                            default:
-                                
-                                Console.WriteLine("Opcion no valida");
-                                Console.ReadKey();
-                                Console.Clear();
-                                
+                {
+                    
+                    case 1:
+                        Console.Clear();
+                        Juego.Partidas.IniciarNuevaPartida();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Datos.Game.CargarPartida();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Hola");
+                        Console.ReadKey();
+                        goto Seleccion;
+                    case 4:
+                        Console.Clear();
+                        
+                        break;
+                    default:
+                        
+                        Console.WriteLine("Opcion no valida");
+                        Console.ReadKey();
+                        Console.Clear();
+                        
 
-                                goto Seleccion;
-                        }
+                        goto Seleccion;
+                }
         }
     }
 }

@@ -17,6 +17,8 @@ namespace Datos
         public int Comodines { get; set; }
         public int Puntos { get; set; }
 
+        public int x { get; set; }
+
         public GameState()
         {
             Vidas = 10;
@@ -38,6 +40,22 @@ namespace Datos
         using (FileStream stream = new FileStream(saveFilePath, FileMode.OpenOrCreate))
         {
             System.Text.Json.JsonSerializer.Serialize(stream, state);
+        }
+    }
+
+    public static void BorrarPartida()
+    {
+        try
+        {
+                File.Delete(saveFilePath);
+                
+            
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error al borrar la partida: " + e.Message);
+            // Manejar el error de forma adecuada (mostrar mensaje al usuario, etc.)
         }
     }
 

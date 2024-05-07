@@ -11,8 +11,14 @@ namespace Juego
             
             Random random = new Random();
 
+
+
             for(state.x = 10; state.x >= state.Turnos; state.x--)
             {
+
+                List<int> numerosAleatorios = new List<int>{random.Next(1, 6), random.Next(1, 6), random.Next(1, 6)};
+                
+
 
                 if(state.x==0){
                     Console.WriteLine("Perdiste la vida");
@@ -25,16 +31,17 @@ namespace Juego
                     return;
                 }
                 bool comodines = true;
-                int numerodado = random.Next(1, 6);
-                int numerodado2 =random.Next(1, 6);
-                int numerodado3 =random.Next(1, 6);
 
+                
+                int n1=numerosAleatorios.ElementAt(0);
+                int n2=numerosAleatorios.ElementAt(1);
+                int n3=numerosAleatorios.ElementAt(2);
 
                 Pantalla:
 
                 Console.Clear();
                 Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
-                Console.WriteLine($"Numeros requeridos: {numerodado} {numerodado2} {numerodado3}\n");
+                Console.WriteLine($"Numeros requeridos: {n1} {n2} {n3}\n");
                 Console.WriteLine(@$"
                 Ingrese 1 para tirar los dados
                 Ingrese 2 para usar un comodin
@@ -46,49 +53,27 @@ namespace Juego
                  switch (opcion) {
                     case 1:
 
-                        int dado1 = random.Next(1, 6);
-                        int dado2 = random.Next(1, 6);
-                       
+                         List<int> dados = new List<int>{random.Next(1,6), random.Next(1,6)};
+
+                        int dado1 = dados[0];
+                        int dado2 = dados[1];
                         Console.WriteLine($"Tirando dados... {dado1} {dado2}");
 
-                        if(dado1==numerodado && dado1==numerodado2 && dado1==numerodado3||dado2==numerodado && dado2==numerodado2 && dado2==numerodado3){
-                            Console.WriteLine("Has acertado tres números!");
-                            state.Puntos+=3;
-                        }
-                        else if(dado1==numerodado && dado1==numerodado2 ||dado1==numerodado && dado1==numerodado3|| dado1==numerodado2 && dado1==numerodado3)
-                        {
-                            Console.WriteLine("Has acertado dos números!");
-                            state.Puntos+=2;
-                        }
-                        else if(dado2==numerodado && dado2==numerodado2 ||dado2==numerodado && dado2==numerodado3|| dado2==numerodado2 && dado2==numerodado3)
-                        {
-                            Console.WriteLine("Has acertado dos números!");
-                            state.Puntos+=2;
-                        }
-                        else if (dado1 == numerodado || dado2 == numerodado )
-                        {
-                            Console.WriteLine("Has acertado el primer número!");
-                            state.Puntos++;
-                           
-                        }
-                        else if (dado1 == numerodado2 || dado2 == numerodado2 ){
-                            Console.WriteLine("Has acertado el segundo número!");
-                            state.Puntos++;
-                            
-                        }
+                        int coincidencias = 0;
 
-                        else if (dado1 == numerodado3 || dado2 == numerodado3 )
-                        {
-                            Console.WriteLine("Has acertado el tercer número!");
-                            state.Puntos++;
-                            
-                        }
-                        
-                        else
-                        {
-                            Console.WriteLine("No has acertado los números requeridos.");
-                            state.Vidas--;
-                        }
+                        foreach (int numeroLista1 in numerosAleatorios)
+                            {
+                                foreach (int numeroLista2 in dados)
+                                {
+                                    if (numeroLista1 == numeroLista2)
+                                        coincidencias++;  
+                                }
+                            }
+                        if(coincidencias == 0)
+                        state.Vidas--;
+
+                        Console.WriteLine("Número de coincidencias: " + coincidencias);
+                        state.Puntos += coincidencias;
                         Console.ReadKey();
                         break;
                     case 2:
@@ -201,85 +186,65 @@ namespace Juego
 
             for(state.x = state.x; state.x >= state.Turnos; state.x--)
             {
+                 List<int> numerosAleatorios = new List<int>{random.Next(1, 6), random.Next(1, 6), random.Next(1, 6)};
+                
+
+
                 if(state.x==0){
                     Console.WriteLine("Perdiste la vida");
                     Console.ReadKey();
                     return;
                 }
                  if(state.Puntos==10){
-                    Console.Clear();
                     Console.WriteLine("Has ganado");
                     Console.ReadKey();
-                    Datos.Game.BorrarPartida();
                     return;
                 }
-
                 bool comodines = true;
-                int numerodado = random.Next(1, 6);
-                int numerodado2 =random.Next(1, 6);
-                int numerodado3 =random.Next(1, 6);
 
+                
+                int n1=numerosAleatorios.ElementAt(0);
+                int n2=numerosAleatorios.ElementAt(1);
+                int n3=numerosAleatorios.ElementAt(2);
 
                 Pantalla:
 
                 Console.Clear();
                 Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
-                Console.WriteLine($"Numeros requeridos: {numerodado} {numerodado2} {numerodado3}\n");
+                Console.WriteLine($"Numeros requeridos: {n1} {n2} {n3}\n");
                 Console.WriteLine(@$"
                 Ingrese 1 para tirar los dados
                 Ingrese 2 para usar un comodin
                 Ingrese 3 para guardar y salir
                 Ingrese 4 para salir sin guardar");
-
+               
                 try{
                 int opcion = int.Parse(Console.ReadLine());
 
                 switch (opcion) {
                     case 1:
 
-                        int dado1 = random.Next(1, 6);
-                        int dado2 = random.Next(1, 6);
-                       
+                         List<int> dados = new List<int>{random.Next(1,6), random.Next(1,6)};
+
+                        int dado1 = dados[0];
+                        int dado2 = dados[1];
                         Console.WriteLine($"Tirando dados... {dado1} {dado2}");
 
-                        if(dado1==numerodado && dado1==numerodado2 && dado1==numerodado3||dado2==numerodado && dado2==numerodado2 && dado2==numerodado3){
-                            Console.WriteLine("Has acertado tres números!");
-                            state.Puntos+=3;
-                        }
-                        else if(dado1==numerodado && dado1==numerodado2 ||dado1==numerodado && dado1==numerodado3|| dado1==numerodado2 && dado1==numerodado3)
-                        {
-                            Console.WriteLine("Has acertado dos números!");
-                            state.Puntos+=2;
-                        }
-                        else if(dado2==numerodado && dado2==numerodado2 ||dado2==numerodado && dado2==numerodado3|| dado2==numerodado2 && dado2==numerodado3)
-                        {
-                            Console.WriteLine("Has acertado dos números!");
-                            state.Puntos+=2;
-                        }
-                        else if (dado1 == numerodado || dado2 == numerodado )
-                        {
-                            Console.WriteLine("Has acertado el primer número!");
-                            state.Puntos++;
-                           
-                        }
-                        else if (dado1 == numerodado2 || dado2 == numerodado2 ){
-                            Console.WriteLine("Has acertado el segundo número!");
-                            state.Puntos++;
-                            
-                        }
+                        int coincidencias = 0;
 
-                        else if (dado1 == numerodado3 || dado2 == numerodado3 )
-                        {
-                            Console.WriteLine("Has acertado el tercer número!");
-                            state.Puntos++;
-                            
-                        }
-                        
-                        else
-                        {
-                            Console.WriteLine("No has acertado los números requeridos.");
-                            state.Vidas--;
-                        }
+                        foreach (int numeroLista1 in numerosAleatorios)
+                            {
+                                foreach (int numeroLista2 in dados)
+                                {
+                                    if (numeroLista1 == numeroLista2)
+                                        coincidencias++;  
+                                }
+                            }
+                        if(coincidencias == 0)
+                        state.Vidas--;
+
+                        Console.WriteLine("Número de coincidencias: " + coincidencias);
+                        state.Puntos += coincidencias;
                         Console.ReadKey();
                         break;
                     case 2:
@@ -310,7 +275,7 @@ namespace Juego
                                          Console.Write($"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
                                             Console.Write($"2 puntos extra");
-                                              Console.ForegroundColor=ConsoleColor.White;
+                                            Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos++;
                                             state.Puntos++;
                                             break;

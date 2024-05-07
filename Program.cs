@@ -1,6 +1,7 @@
 ﻿using System;
 using Fonts;
 using Juego;
+using Datos;
 
 namespace KillerCard
 {
@@ -49,19 +50,20 @@ namespace KillerCard
                             
                             case 1:
                                 Console.Clear();
-                                Juego.Juego.Jugar();
+                                Juego.Partidas.IniciarNuevaPartida();
                                 break;
                             case 2:
                                 Console.Clear();
-                                Juego.Juego.CargarPartida();
+                                Datos.Game.CargarPartida();
                                 break;
                             case 3:
                                 Console.Clear();
-                                Juego.Juego.Creditos();
+                                Console.WriteLine("Hola");
+                                Console.ReadKey();
                                 break;
                             case 4:
                                 Console.Clear();
-                                Juego.Juego.Salir();
+                                
                                 break;
                             default:
                                 

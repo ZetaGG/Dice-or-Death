@@ -13,14 +13,16 @@ namespace Datos
      public class GameState
     {
         public int Vidas { get; set; }
-        public int Turno { get; set; }
+        public int Turnos { get; set; }
         public int Comodines { get; set; }
+        public int Puntos { get; set; }
 
         public GameState()
         {
             Vidas = 10;
-            Turno = 1;
+            Turnos = 0;
             Comodines = 3;
+            Puntos = 0;
         }
         
 

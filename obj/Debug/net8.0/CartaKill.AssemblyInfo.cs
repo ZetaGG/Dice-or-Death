@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CartaKill")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c24e6182005a2e3dff1d6b4bca074e26e86aeff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4722a42d67ea26553cc4e54a173af198bc712f06")]
 [assembly: System.Reflection.AssemblyProductAttribute("CartaKill")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CartaKill")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

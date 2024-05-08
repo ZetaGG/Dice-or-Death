@@ -25,7 +25,7 @@ namespace KillerCard
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.White;
 
-            Console.Write("Killer Card");
+            Console.Write("Dice Or Death");
             
 
             Console.BackgroundColor = ConsoleColor.Black;
@@ -40,8 +40,16 @@ namespace KillerCard
 
            
             int opcion = 0;
+            try
+            {
+                opcion = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                
+                goto Seleccion;
+            }
             
-            opcion = int.Parse(Console.ReadLine());
 
             switch (opcion)
                 {
@@ -49,14 +57,35 @@ namespace KillerCard
                     case 1:
                         Console.Clear();
                         Juego.Partidas.IniciarNuevaPartida();
-                        break;
+                        goto Seleccion;
                     case 2:
                         Console.Clear();
                         Datos.Game.CargarPartida();
-                        break;
+                        goto Seleccion;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("Hola");
+                        Fonts.ConsoleUtils.Escribir(15,@$"
+        Desarrollado por:
+        Zeta y Evergaster
+    
+        Nombres reales:
+    Jose Martin Moreno Hernandez
+      Everardo Garcia Romero
+
+        Desarrollado en:
+        Visual Studio Code
+
+        Inspiraciones:
+           Unlikeil
+        
+    Este proyecto fue creado
+       para la siguiente
+           materia:
+     Programacion Orientada
+          a Objetos
+
+    
+    ");
                         Console.ReadKey();
                         goto Seleccion;
                     case 4:

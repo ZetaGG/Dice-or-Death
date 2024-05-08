@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Fonts{
     public static class ConsoleUtils
@@ -58,6 +59,15 @@ namespace Fonts{
         {
             consoleFontInfo.dwFontSize.Y -= 2; // Decrease the font size by 2 to restore it to the original size
             SetCurrentConsoleFontEx(consoleOutput, false, ref consoleFontInfo);
+        }
+    }
+
+    public static void Escribir(int vel,string texto)
+    {
+        for(int i = 0; i < texto.Length; i++)
+        {
+            Console.Write(texto[i]);
+            Thread.Sleep(vel);
         }
     }
 }

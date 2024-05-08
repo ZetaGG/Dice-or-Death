@@ -1,5 +1,6 @@
 using System;
 using Datos;
+using Fonts;
 
 namespace Juego
 {
@@ -13,23 +14,11 @@ namespace Juego
 
 
 
-            for(state.x = 10; state.x >= state.Turnos; state.x--)
+            for(state.x = 10; state.x >= state.Turnos || state.Puntos==10; state.x--)
             {
 
-                List<int> numerosAleatorios = new List<int>{random.Next(1, 6), random.Next(1, 6), random.Next(1, 6)};
+                List<int> numerosAleatorios = new List<int>{random.Next(1, 7), random.Next(1, 7), random.Next(1, 7)};
                 
-
-
-                if(state.x==0){
-                    Console.WriteLine("Perdiste la vida");
-                    Console.ReadKey();
-                    return;
-                }
-                 if(state.Puntos==10){
-                    Console.WriteLine("Has ganado");
-                    Console.ReadKey();
-                    return;
-                }
                 bool comodines = true;
 
                 
@@ -38,6 +27,22 @@ namespace Juego
                 int n3=numerosAleatorios.ElementAt(2);
 
                 Pantalla:
+
+                if(state.x==0){
+                    Console.WriteLine("");
+                    Fonts.ConsoleUtils.Escribir(25,"Perdiste la vida");
+                    Console.ReadKey();
+                    return;
+                }
+                 else if(state.Puntos==10){
+                    Console.WriteLine("");
+                    Fonts.ConsoleUtils.Escribir(25,"Has ganado");
+                    Console.ReadKey();
+                    return;
+                }
+
+                else if (state.Puntos!=10){
+                
 
                 Console.Clear();
                 Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
@@ -53,11 +58,12 @@ namespace Juego
                  switch (opcion) {
                     case 1:
 
-                         List<int> dados = new List<int>{random.Next(1,6), random.Next(1,6)};
+                         List<int> dados = new List<int>{random.Next(1,7), random.Next(1,7)};
 
                         int dado1 = dados[0];
                         int dado2 = dados[1];
-                        Console.WriteLine($"Tirando dados... {dado1} {dado2}");
+                        Fonts.ConsoleUtils.Escribir(25, $"Tirando dados... {dado1} {dado2}");
+
 
                         int coincidencias = 0;
 
@@ -72,7 +78,9 @@ namespace Juego
                         if(coincidencias == 0)
                         state.Vidas--;
 
-                        Console.WriteLine("Número de coincidencias: " + coincidencias);
+                        Console.WriteLine("");
+                        Fonts.ConsoleUtils.Escribir(25, $"Numero de Coincidencias:... {coincidencias}");
+
                         state.Puntos += coincidencias;
                         Console.ReadKey();
                         break;
@@ -82,49 +90,50 @@ namespace Juego
                                 if (state.Comodines > 0)
                                 {
                                     int dado = random.Next(1, 6);
-                                    Console.WriteLine("Usando comodín...");
+                                    Fonts.ConsoleUtils.Escribir(25,"Usando comodín...");
+                                    Console.WriteLine("");
 
                                 //* Switch Comodines
                                     switch (dado){
                                         case 1:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"1 punto extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 punto extra");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos++;
                                             break;
                                         case 2:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"1 Turno extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 Turno extra");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.x++;
                                             break;
                                         case 3:
-                                         Console.Write($"Numero del dado {dado}: ");
+                                         Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"2 puntos extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"2 puntos extra");
                                             Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos++;
                                             state.Puntos++;
                                             break;
                                         case 4:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"1 punto menos");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 punto menos");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos--;
                                             break;
                                         case 5:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"1 turno menos");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 turno menos");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.x--;
                                             break;
-                                        case 6:Console.Write($"Numero del dado {dado}: ");
+                                        case 6:Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"Perdiste este comodin");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Perdiste este comodin");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             break;
 
@@ -138,18 +147,18 @@ namespace Juego
                                 }
                                 else
                                 {
-                                    Console.WriteLine("No tienes comodines disponibles.");
+                                    Fonts.ConsoleUtils.Escribir(25,"No tienes comodines disponibles.");
                                     Console.ReadKey();
                                     goto Pantalla;
                                 }
                             }
                             else{
-                                Console.WriteLine("Ya has usado un comodín.");
+                                Fonts.ConsoleUtils.Escribir(25,"Ya has usado un comodín.");
                                 Console.ReadKey();
                                     goto Pantalla;
                             }
                     case 3:
-                    Console.WriteLine("Guardando partida...");
+                    Fonts.ConsoleUtils.Escribir(25,"Guardando partida...");
                     Datos.Game.BorrarPartida();
                     Datos.Game.SaveGame(state);
                     Console.ReadKey();
@@ -172,7 +181,7 @@ namespace Juego
                     
                     goto Pantalla;
                 }
-
+            }
                 
                
             }
@@ -186,21 +195,10 @@ namespace Juego
 
             for(state.x = state.x; state.x >= state.Turnos; state.x--)
             {
-                 List<int> numerosAleatorios = new List<int>{random.Next(1, 6), random.Next(1, 6), random.Next(1, 6)};
+                 List<int> numerosAleatorios = new List<int>{random.Next(1, 7), random.Next(1, 7), random.Next(1, 7)};
                 
 
-
-                if(state.x==0){
-                    Console.WriteLine("Perdiste la vida");
-                    Console.ReadKey();
-                    return;
-                }
-                 if(state.Puntos==10){
-                    Console.WriteLine("Has ganado");
-                    Console.ReadKey();
-                    return;
-                }
-                bool comodines = true;
+                 bool comodines = true;
 
                 
                 int n1=numerosAleatorios.ElementAt(0);
@@ -208,6 +206,21 @@ namespace Juego
                 int n3=numerosAleatorios.ElementAt(2);
 
                 Pantalla:
+                if(state.x==0){
+                    Console.WriteLine("");
+                    Fonts.ConsoleUtils.Escribir(25,"Perdiste la vida");
+                    Console.ReadKey();
+                    return;
+                }
+                else if(state.Puntos==10){
+                    Console.WriteLine("");
+                    Fonts.ConsoleUtils.Escribir(25,"Has ganado");
+                    Console.ReadKey();
+                    return;
+                }
+
+                else if(state.Puntos!=10){
+               
 
                 Console.Clear();
                 Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
@@ -224,11 +237,12 @@ namespace Juego
                 switch (opcion) {
                     case 1:
 
-                         List<int> dados = new List<int>{random.Next(1,6), random.Next(1,6)};
+                         List<int> dados = new List<int>{random.Next(1,7), random.Next(1,7)};
 
                         int dado1 = dados[0];
                         int dado2 = dados[1];
-                        Console.WriteLine($"Tirando dados... {dado1} {dado2}");
+                        Fonts.ConsoleUtils.Escribir(25, $"Tirando dados... {dado1} {dado2}");
+
 
                         int coincidencias = 0;
 
@@ -243,7 +257,9 @@ namespace Juego
                         if(coincidencias == 0)
                         state.Vidas--;
 
-                        Console.WriteLine("Número de coincidencias: " + coincidencias);
+                        Console.WriteLine("");
+                        Fonts.ConsoleUtils.Escribir(25, $"Numero de Coincidencias:... {coincidencias}");
+
                         state.Puntos += coincidencias;
                         Console.ReadKey();
                         break;
@@ -253,49 +269,50 @@ namespace Juego
                                 if (state.Comodines > 0)
                                 {
                                     int dado = random.Next(1, 6);
-                                    Console.WriteLine("Usando comodín...");
+                                    Fonts.ConsoleUtils.Escribir(25,"Usando comodín...");
+                                    Console.WriteLine("");
 
                                 //* Switch Comodines
                                     switch (dado){
                                         case 1:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"1 punto extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 punto extra");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos++;
                                             break;
                                         case 2:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"1 Turno extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 Turno extra");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.x++;
                                             break;
                                         case 3:
-                                         Console.Write($"Numero del dado {dado}: ");
+                                         Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Green;
-                                            Console.Write($"2 puntos extra");
+                                            Fonts.ConsoleUtils.Escribir(25,$"2 puntos extra");
                                             Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos++;
                                             state.Puntos++;
                                             break;
                                         case 4:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"1 punto menos");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 punto menos");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.Puntos--;
                                             break;
                                         case 5:
-                                            Console.Write($"Numero del dado {dado}: ");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"1 turno menos");
+                                            Fonts.ConsoleUtils.Escribir(25,$"1 turno menos");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             state.x--;
                                             break;
-                                        case 6:Console.Write($"Numero del dado {dado}: ");
+                                        case 6:Fonts.ConsoleUtils.Escribir(25,$"Numero del dado {dado}: ");
                                             Console.ForegroundColor=ConsoleColor.Red;
-                                            Console.Write($"Perdiste este comodin");
+                                            Fonts.ConsoleUtils.Escribir(25,$"Perdiste este comodin");
                                               Console.ForegroundColor=ConsoleColor.White;
                                             break;
 
@@ -309,18 +326,18 @@ namespace Juego
                                 }
                                 else
                                 {
-                                    Console.WriteLine("No tienes comodines disponibles.");
+                                    Fonts.ConsoleUtils.Escribir(25,"No tienes comodines disponibles.");
                                     Console.ReadKey();
                                     goto Pantalla;
                                 }
                             }
                             else{
-                                Console.WriteLine("Ya has usado un comodín.");
+                                Fonts.ConsoleUtils.Escribir(25,"Ya has usado un comodín.");
                                 Console.ReadKey();
                                     goto Pantalla;
                             }
                     case 3:
-                    Console.WriteLine("Guardando partida...");
+                    Fonts.ConsoleUtils.Escribir(25,"Guardando partida...");
                     Datos.Game.BorrarPartida();
                     Datos.Game.SaveGame(state);
                     Console.ReadKey();
@@ -340,7 +357,8 @@ namespace Juego
                 catch(Exception e){
                       goto Pantalla;
                 }
-
+                }
+                
                 
                 
             }

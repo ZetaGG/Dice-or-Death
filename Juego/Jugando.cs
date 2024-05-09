@@ -9,6 +9,9 @@ namespace Juego
         {
            
              GameState state = new GameState();
+
+             Console.WriteLine("Ingrese su nombre: ");
+             state.Nombre = Console.ReadLine();
             
             Random random = new Random();
 
@@ -45,8 +48,9 @@ namespace Juego
                 
 
                 Console.Clear();
-                Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
-                Console.WriteLine($"Numeros requeridos: {n1} {n2} {n3}\n");
+Console.WriteLine(@$"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos}  
+5.-Nueva Partida 6.-Cargar Partida 7.Creditos  ");
+                Console.WriteLine($"\nNumeros requeridos: {n1} {n2} {n3}\n");
                 Console.WriteLine(@$"
                 Ingrese 1 para tirar los dados
                 Ingrese 2 para usar un comodin
@@ -159,13 +163,50 @@ namespace Juego
                             }
                     case 3:
                     Fonts.ConsoleUtils.Escribir(25,"Guardando partida...");
-                    Datos.Game.BorrarPartida();
+                    Datos.Game.BorrarPartida(state);
                     Datos.Game.SaveGame(state);
                     Console.ReadKey();
                     return;
 
                     case 4:
                     return;
+
+                    case 5:
+                    Console.Clear();
+                    IniciarNuevaPartida(); return;
+                    case 6:
+                    Console.Clear();
+                    Datos.Game.CargarPartida();
+                     return;
+
+                     case 7:
+                     Console.Clear();
+                        Fonts.ConsoleUtils.Escribir(15,@$"
+        Desarrollado por:
+        Zeta y Evergaster
+    
+        Nombres reales:
+    Jose Martin Moreno Hernandez
+      Everardo Garcia Romero
+
+        Desarrollado en:
+        Visual Studio Code
+
+        Inspiraciones:
+           Unlikeil
+        
+    Este proyecto fue creado
+       para la siguiente
+           materia:
+     Programacion Orientada
+          a Objetos
+
+    
+    ");
+    Console.ReadKey();
+    goto Pantalla;
+    
+           
 
                     default:
                     
@@ -223,8 +264,9 @@ namespace Juego
                
 
                 Console.Clear();
-                Console.WriteLine($"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos} \n ");
-                Console.WriteLine($"Numeros requeridos: {n1} {n2} {n3}\n");
+                Console.WriteLine(@$"Vidas: {state.Vidas}  Turno: {state.x} Comodines: {state.Comodines} Puntos: {state.Puntos}  
+5.-Nueva Partida 6.-Cargar Partida 7.Creditos  ");
+                Console.WriteLine($"\nNumeros requeridos: {n1} {n2} {n3}\n");
                 Console.WriteLine(@$"
                 Ingrese 1 para tirar los dados
                 Ingrese 2 para usar un comodin
@@ -338,13 +380,50 @@ namespace Juego
                             }
                     case 3:
                     Fonts.ConsoleUtils.Escribir(25,"Guardando partida...");
-                    Datos.Game.BorrarPartida();
+                    Datos.Game.BorrarPartida(state);
                     Datos.Game.SaveGame(state);
                     Console.ReadKey();
                     return;
 
                     case 4:
                     return;
+
+                     case 5:
+                    Console.Clear();
+                    IniciarNuevaPartida(); return;
+                    case 6:
+                    Console.Clear();
+                    Datos.Game.CargarPartida();
+                     return;
+
+                     case 7:
+                     Console.Clear();
+                        Fonts.ConsoleUtils.Escribir(15,@$"
+        Desarrollado por:
+        Zeta y Evergaster
+    
+        Nombres reales:
+    Jose Martin Moreno Hernandez
+      Everardo Garcia Romero
+
+        Desarrollado en:
+        Visual Studio Code
+
+        Inspiraciones:
+           Unlikeil
+        
+    Este proyecto fue creado
+       para la siguiente
+           materia:
+     Programacion Orientada
+          a Objetos
+
+    
+    ");
+    Console.ReadKey();
+    goto Pantalla;
+    
+           
 
                     default:
                     

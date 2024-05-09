@@ -9,10 +9,10 @@ using Juego;
 namespace Datos
 {
     [Serializable]
-
-     public class GameState
+    public class GameState
     {
         public int Vidas { get; set; }
+        public string Nombre { get; set; }
         public int Turnos { get; set; }
         public int Comodines { get; set; }
         public int Puntos { get; set; }
@@ -21,47 +21,55 @@ namespace Datos
 
         public GameState()
         {
+            Nombre = "Nombre";
             Vidas = 10;
             Turnos = 0;
             Comodines = 3;
             Puntos = 0;
         }
-        
-
-        
     }
 
-    class Game
+    public class Game
     {
-    private static string saveFilePath = "game_save.dat";
-
-    public static void SaveGame(GameState state)
-    {
-        using (FileStream stream = new FileStream(saveFilePath, FileMode.OpenOrCreate))
+        public static void SaveGame(GameState state)
         {
-            System.Text.Json.JsonSerializer.Serialize(stream, state);
+            string saveFilePath = $"{state.Nombre}_game_save.dat";
+
+            try
+            {
+                using (FileStream stream = new FileStream(saveFilePath, FileMode.OpenOrCreate))
+                {
+                    System.Text.Json.JsonSerializer.Serialize(stream, state);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al guardar la partida: " + e.Message);
+                // Manejar el error de forma adecuada (mostrar mensaje al usuario, etc.)
+            }
         }
-    }
 
-    public static void BorrarPartida()
-    {
-        try
+        public static void BorrarPartida(GameState state)
         {
+            try
+            {
+                string saveFilePath = $"{state.Nombre}_game_save.dat";
                 File.Delete(saveFilePath);
-                
-            
-            
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al borrar la partida: " + e.Message);
+                // Manejar el error de forma adecuada (mostrar mensaje al usuario, etc.)
+            }
         }
-        catch (Exception e)
-        {
-            Console.WriteLine("Error al borrar la partida: " + e.Message);
-            // Manejar el error de forma adecuada (mostrar mensaje al usuario, etc.)
-        }
-    }
 
-    public static void CargarPartida()
+        public static void CargarPartida()
         {
-            GameState state = null; 
+            Console.WriteLine("Ingrese el nombre del jugador para cargar la partida:");
+            string nombreJugador = Console.ReadLine();
+            string saveFilePath = $"{nombreJugador}_game_save.dat";
+
+            GameState state = null;
 
             try
             {
@@ -77,7 +85,7 @@ namespace Datos
                 }
                 else
                 {
-                    Console.WriteLine("No hay partida guardada. Iniciando una nueva partida...");
+                    Console.WriteLine("No hay partida guardada para el jugador especificado. Iniciando una nueva partida...");
                     Console.ReadKey();
                     Console.Clear();
                     Partidas.IniciarNuevaPartida();
@@ -89,10 +97,5 @@ namespace Datos
                 // Manejar el error de forma adecuada (mostrar mensaje al usuario, etc.)
             }
         }
-
-        
-
-    
     }
-
 }
